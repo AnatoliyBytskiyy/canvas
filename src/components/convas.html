@@ -1,0 +1,78 @@
+<div class="hello" @mousemove="mousemove" @mousedown="mousedown" @mouseup="mouseup">
+    <b-container>
+<!--        <div id="transfer" class="transfer">-->
+            <canvas id="C" width="50" height="50"></canvas>
+<!--        </div>-->
+        <b-row>
+            <b-col>
+                <b-row>
+                    <b-col>
+                        <h3>Conteiner A</h3>
+                        <canvas id="A" width="500" height="400" @mousemove="move" @mousedown="down" @mouseup="up"></canvas>
+                        <pre class="m-0">x : {{ mouse.x }}</pre>
+                        <pre class="m-0">y : {{ mouse.y }}</pre>
+                        <pre class="m-0" v-show="selected">ДА</pre>
+                        <pre class="m-0" v-show="!selected">НЕТ</pre>
+                    </b-col>
+                </b-row>
+                <b-row>
+                    <b-col>
+                        <b-form>
+                            <b-form-group
+                                    id="obj_name_group"
+                                    label="Оbject name:"
+                                    label-for="obj_name"
+                            >
+                                <b-form-input
+                                        id="obj_name"
+                                        v-model="form.name"
+                                        type="text"
+                                        placeholder="Enter object name"
+                                        required
+                                ></b-form-input>
+                            </b-form-group>
+
+                            <b-form-group id="obj_conteiner_group" label="Object conteiner:" label-for="obj_conteiner">
+                                <b-form-select id="obj_conteiner" v-model="form.selected" class="mb-3" required>
+                                    <b-form-select-option value="A">Conteiner A</b-form-select-option>
+                                    <b-form-select-option value="B">Conteiner B</b-form-select-option>
+                                </b-form-select>
+                            </b-form-group>
+
+                            <b-form-group id="select_img_group" label="Object conteiner:" label-for="select_img">
+                                <b-form-file
+                                    :state="Boolean(form.file)"
+                                    placeholder="Select image"
+                                    drop-placeholder="Drop file here..."
+                                    accept=".jpg, .png, .gif"
+                                    v-on:change="handleFileUpload"
+                                ></b-form-file>
+                            </b-form-group>
+
+                            <b-button type="button" variant="primary" @click="onSubmit">Submit</b-button>
+                            <b-button type="button" variant="danger" @click="clear">Clear</b-button>
+                        </b-form>
+                    </b-col>
+                </b-row>
+            </b-col>
+            <b-col>
+                <b-row>
+                    <b-col>
+                        <h3>Conteiner B</h3>
+                        <canvas id="B" width="500" height="400" @mousemove="move" @mousedown="down" @mouseup="up"></canvas>
+                    </b-col>
+                </b-row>
+                <b-row>
+                    <b-col>
+                        <h3>Log</h3>
+                        <div id="log">
+                            <p v-for="value in logs" v-html="value">
+                                {{ value }}
+                            </p>
+                        </div>
+                    </b-col>
+                </b-row>
+            </b-col>
+        </b-row>
+    </b-container>
+</div>
